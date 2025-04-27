@@ -13,7 +13,6 @@ warnings.filterwarnings("ignore")
 # -------------------------------
 # 1. Load SRS Data
 # -------------------------------
-os.chdir('E:/Blog_Data/sportsBetting/ncaaFootballModeling/2025Season/SRS_Model')
 srsData_conf = pd.read_csv('srs_24_07.csv')
 
 # Correct types
