@@ -30,10 +30,6 @@ team_metadata = pd.read_csv('team_metadata.csv')
 team_colors = dict(zip(team_metadata['school'], team_metadata['color']))
 team_logos = dict(zip(team_metadata['school'], team_metadata['logo']))
 
-
-
-team_metadata = get_team_metadata()
-
 # -------------------------------
 # 3. Streamlit App Layout
 # -------------------------------
