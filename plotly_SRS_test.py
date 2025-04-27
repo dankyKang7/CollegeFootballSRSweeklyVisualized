@@ -30,7 +30,7 @@ srsData_conf['season_week'] = srsData_conf.apply(
 @st.cache_data
 def get_team_metadata():
     configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = "6Z0xaxJ0Fo2kMQkOinS0TUgFvIdrq3NjggG+JzmbUK7bSRPOifJQgETk8dcpIT1k"
+    configuration.api_key['Authorization'] = st.secrets["api_keys"]["cfbd"]
     configuration.api_key_prefix['Authorization'] = 'Bearer'
     api_instance = cfbd.TeamsApi(cfbd.ApiClient(configuration))
     teams = api_instance.get_fbs_teams()
