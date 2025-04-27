@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.express as px
 import os
 import warnings
-import cfbd
 st.set_page_config(page_title="College Football SRS Dashboard", layout="wide")
 
 
@@ -27,29 +26,9 @@ srsData_conf['season_week'] = srsData_conf.apply(
 # -------------------------------
 # 2. Pull Team Colors + Logos
 # -------------------------------
-@st.cache_data
-def get_team_metadata():
-    configuration = cfbd.Configuration()
-    configuration.api_key['Authorization'] = st.secrets["api_keys"]["cfbd"]
-    configuration.api_key_prefix['Authorization'] = 'Bearer'
-    api_instance = cfbd.TeamsApi(cfbd.ApiClient(configuration))
-    teams = api_instance.get_fbs_teams()
-    
-    team_info = {}
-    for team in teams:
-        if team.school:
-            raw_color = team.color
-            if raw_color:
-                if not raw_color.startswith("#"):
-                    raw_color = "#" + raw_color
-                color = raw_color[:7]  # 🔥 Take only #RRGGBB
-            else:
-                color = 'gray'
-            team_info[team.school] = {
-                'color': color,
-                'logo': team.logos[0] if team.logos else None
-            }
-    return team_info
+team_metadata = pd.read_csv('team_metadata.csv')
+team_colors = dict(zip(team_metadata['school'], team_metadata['color']))
+team_logos = dict(zip(team_metadata['school'], team_metadata['logo']))
 
 
 
